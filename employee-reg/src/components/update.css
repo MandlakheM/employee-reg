@@ -1,0 +1,114 @@
+.updateContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.viewTable{
+    display: flex;
+    flex-direction: column;
+    overflow-x:auto
+    /* width: 100%; */
+}
+
+.searchContainer{
+align-self: center;
+justify-self: center;
+}
+
+.searchContainer input{
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #1ed2f4;
+    background-color:#eeee;
+    border-radius: 5px;
+    outline: none;
+}
+
+.searchButtons button{
+    background-color: #1ed2f4;
+    border-radius: 10px;
+    width: 60px;
+    height: 30px;
+    border-style: none;
+    align-self: center;
+}
+
+
+.searchButtons{
+    width: 500px;
+    display: flex;
+    align-self: center;
+    justify-content: space-around;
+}
+
+/* table{
+    width: auto;
+} */
+
+th, td{
+    width:10%;
+    height: 30px;
+    /* border: 1px solid #3565d4 ; */
+    background-color: #c8c4bc;
+}
+
+tr{
+    font-size: .8rem;
+}
+
+.tableIcons{
+    font-size: 1.5rem;
+    color: black;
+    cursor: pointer;
+}
+
+.modal,
+.overlay{
+  width: 100vw;
+  height: 100vh;
+  top: 5;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay{
+  background: rgba(49, 49, 49, 0.8);
+}
+
+.modalContent{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+}
+
+.closeModal{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+}
+
+.submitBtn{
+    background-color: #1ed2f4;
+    border-radius: 10px;
+    width: 150px;
+    height: 30px;
+    border-style: none;
+    align-self: center;
+    /* margin-top: 30px; */
+  }
+
+  @media(max-width:770px){
+
+  }

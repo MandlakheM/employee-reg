@@ -1,0 +1,28 @@
+.headerContainer {
+    /* background-color: black; */
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.logo,
+.logo img {
+    width: 150px;
+    height: auto;
+    margin-right: auto;
+}
+
+.heading {
+    width: 450px;
+    height: auto;
+    justify-self: center;
+    margin-right: auto;
+
+}
+
+#heading {
+    font-weight: 400;
+    /* color:#121619; */
+}

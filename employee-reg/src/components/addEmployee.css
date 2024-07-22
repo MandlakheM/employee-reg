@@ -1,0 +1,97 @@
+.addEmpContainer {
+  height: 100%;
+}
+
+.formContainer {
+  /* height: 100vh; */
+  width: 75vw;
+  display: flex;
+  flex-direction: column;
+    /* justify-content: center; */
+    /* background-color: #f4f5f6; */
+}
+
+.formContainer p{
+    margin: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  /* height: 100vh; */
+  gap: 12px;
+  /* justify-content: space-between; */
+}
+
+#small {
+  font-size: 0.7rem;
+  align-self: center;
+  margin: 0;
+}
+
+#formHeading {
+  align-self: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-decoration: underline;
+  text-underline-offset: auto;
+}
+
+
+.formGroup{
+    position: relative;
+    width: 250px;
+    
+}
+
+.formGroup input, select{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #1ed2f4;
+    background-color:#eeee;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1em;
+}
+
+.formGroup span{
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    text-transform:uppercase;
+}
+
+.formGroup input:valid ~ span,
+.formGroup input:focus ~ span{
+    color: black;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.65em;
+    padding: 0 10px;
+    background-color: #eeee;
+    border-left: 1px solid aqua;
+    border-right: 1px solid aqua;
+}
+
+.names{
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+    row-gap: 15px;
+    /* margin-top: 10px; */
+}
+
+.submitBtn{
+  background-color: #1ed2f4;
+  border-radius: 10px;
+  width: 150px;
+  height: 50px;
+  border-style: none;
+  align-self: center;
+  /* margin-top: 30px; */
+}
+
