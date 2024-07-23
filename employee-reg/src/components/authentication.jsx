@@ -41,13 +41,7 @@ function Authentication() {
             login
           </button>
           <div className="link">
-            <p>
-              Don't have an account?
-              <a href="#" className="signup-link">
-                {" "}
-                sign up
-              </a>
-            </p>
+
           </div>
         </form>
       </div>

@@ -7,6 +7,8 @@ import AddEmployee from "./components/addEmployee";
 import Update from "./components/update";
 import Removed from "./components/removed";
 import { Routes, Route } from "react-router-dom";
+import Authenticate from "./components/authentication";
+
 
 function App() {
   const [employees, setEmployees] = useState([]);
@@ -58,8 +60,9 @@ function App() {
 
   return (
     <>
+      {/* <Authenticate /> */}
       <div className="gutter">
-        <div className="appContainer">
+       <div className="appContainer">
           <div className="header">
             <Header />
           </div>
@@ -69,6 +72,8 @@ function App() {
           <div className="main">
             <div className="mainContainer">
               <Routes>
+              {/* <Route path="/" element={<Authenticate/>}></Route> */}
+
                 <Route
                   path="/components/addEmployee"
                   element={

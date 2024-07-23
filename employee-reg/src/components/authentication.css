@@ -1,12 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-} */
-
 :root {
     /* --mainColor: #f012b1; */
     --whiteColor: #ffffff;
@@ -14,21 +5,26 @@
     --labelColor: #333333;
 }
 
-
-
-body {
-    background: linear-gradient(to right, #da4453, var(--mainColor));
-    font-weight: 400;
-    min-height: 100vh;
-    display: grid;
-    place-content: center;
-    overflow: hidden;
-}
+/* html {
+    font-size: 60.5%;
+    scroll-behavior: smooth;
+} */
 
 .wrapper {
+    font-size: 60.5%;
+
     position: relative;
-    width: 35rem;
-    height: 50rem;
+    /* width: 35rem;
+    height: 50rem; */
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background: rgba(49, 49, 49, 0.8);
+
 }
 
 @media(min-width:540px){
@@ -38,6 +34,8 @@ body {
 }
 
 .wrapper .form-container {
+    font-size: 60.5%;
+
     position: absolute;
     top: 0;
     left: 0;
@@ -52,6 +50,8 @@ body {
 }
 
 .wrapper .form-container form h2 {
+    font-size: 60.5%;
+
     font-size: 3rem;
     text-align: center;
     text-transform: capitalize;
@@ -59,6 +59,8 @@ body {
 }
 
 .wrapper .form-container form .form-group {
+    font-size: 60.5%;
+
     position: relative;
     width: 32rem;
     margin: 3rem 0;
@@ -66,6 +68,8 @@ body {
 
 .wrapper .form-container form .form-group i,
 .wrapper .form-container form .form-group label {
+    font-size: 60.5%;
+
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -86,6 +90,8 @@ body {
 }
 
 .wrapper .form-container form .form-group input {
+    font-size: 60.5%;
+
     width: 100%;
     height: 4rem;
     padding: 0 1rem;
@@ -112,6 +118,8 @@ form .form-group input:valid~i {
 }
 
 .wrapper .form-container form .forgot-pass a {
+    font-size: 60.5%;
+
     color: var(--labelColor);
     text-decoration: none;
     font-size: 1.4rem;
@@ -124,8 +132,10 @@ form .form-group input:valid~i {
 }
 
 .wrapper .form-container form .btn {
+    font-size: 60.5%;
+
     background: linear-gradient(to right, #da4453, var(--mainColor));
-    color:#3565d4;
+    color: var(--whiteColor);
     text-transform: capitalize;
     width: 100%;
     height: 4rem;
@@ -139,6 +149,8 @@ form .form-group input:valid~i {
 }
 
 .wrapper .form-container form .link {
+    font-size: 60.5%;
+
     text-align: center;
     font-size: 1.4rem;
     color: var(--labelColor);
@@ -146,6 +158,8 @@ form .form-group input:valid~i {
 }
 
 .wrapper .form-container form .link a {
+    font-size: 60.5%;
+
     text-transform: capitalize;
     color: var(--mainColor);
     text-decoration: none;
