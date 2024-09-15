@@ -1,0 +1,41 @@
+.navbar {
+  background-color: #007bff;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  background-color: white;
+  width: fit-content;
+  font-size: 1.5rem;
+  margin-right: auto;
+}
+
+#group {
+  background-color: black;
+  color: white;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar ul li {
+  display: inline;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.navbar ul li a:hover {
+  background-color: #0056b3;
+  border-radius: 5px;
+}
