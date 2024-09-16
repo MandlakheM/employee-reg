@@ -5,6 +5,7 @@ function ViewDeletedEmployees({ removedEmp }) {
   return (
     <div className="tableContainer">
       <h1>Employees Who Have Left</h1>
+      <div className="table">
       <table className="">
         <thead>
           <tr>
@@ -49,6 +50,7 @@ function ViewDeletedEmployees({ removedEmp }) {
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

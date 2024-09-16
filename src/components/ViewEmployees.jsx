@@ -110,7 +110,8 @@ function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
           Search
         </button>
       </div>
-      <table className="">
+      <div className="table">
+      <table>
         <thead>
           <tr>
             <th>ID</th>
@@ -178,6 +179,7 @@ function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
           ))}
         </tbody>
       </table>
+      </div>
 
       {modal && currentEmployee && (
         <div className="modal">

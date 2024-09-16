@@ -1,9 +1,10 @@
 .tableContainer {
-  width: 90%;
+  width: 90vw;
   margin: 50px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
 
 .searchContainer {
@@ -27,6 +28,10 @@
   justify-content: space-around;
 }
 
+.table {
+  width: 100%;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -38,6 +43,7 @@ td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  width: 10%;
 }
 
 th {
@@ -52,7 +58,7 @@ td {
 .updateBtn,
 .deleteBtn {
   padding: 5px 10px;
-  margin:  5px;
+  margin: 5px;
   color: white;
   border: none;
   border-radius: 5px;
@@ -119,4 +125,27 @@ td {
 
 .closeModal:hover {
   background-color: #c82333;
+}
+
+@media (max-width: 435px) {
+  table {
+    font-size: 0.5rem;
+    width: 100px;
+  }
+  .tableContainer {
+    font-size: 0.5rem;
+    /* overflow: hidden; */
+  }
+  .tableContainer h1 {
+    font-size: 1rem;
+  }
+  .table {
+    overflow-y: scroll;
+  }
+}
+
+@media (max-width: 1360px) {
+  .table {
+    overflow-y: scroll;
+  }
 }

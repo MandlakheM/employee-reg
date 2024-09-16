@@ -38,3 +38,8 @@ select {
 .submitBtn:hover {
   background-color: #0056b3;
 }
+
+@media (max-width: 425px) {
+  
+}
+
