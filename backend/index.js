@@ -9,10 +9,12 @@ const PORT = 4000;
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 app.use("/", employeeRoutes);
-
-app.get("/", (req, res) => res.send("hello from back end"));
+// app.get("/", (req, res) => res.send("hello from back end"));
 app.all("*", (req, res) => res.send("error 404 page not found"));
 
 app.listen(PORT, () =>
