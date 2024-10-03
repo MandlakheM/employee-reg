@@ -1,8 +1,56 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## EMPLOYEE REGISTRATION APP
+  
 
-Currently, two official plugins are available:
+**SUMMARY**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+i) Users can add a new employee with the following details:
+Name,
+
+Email Address,
+
+Phone Number,
+
+Image,
+
+Position,
+
+ID
+
+
+ii) Users can search for employees by ID.
+
+i) Users can delete existing employees.
+
+
+ii) Users can edit existing employee details.
+
+
+ii)View employees who left the organisations.
+
+
+
+## Installation 
+
+
+Step-by-step instructions on how to get the development environment running.
+
+
+```bash
+
+# Clone the repository
+
+git clone https://github.com/MandlakheM/employee-reg.git
+
+# Navigate to the project directory
+
+cd projectname
+
+# Install dependencies
+
+npm install
+
+# Start the project
+
+npm run dev
