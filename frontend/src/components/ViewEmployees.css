@@ -30,12 +30,14 @@
 
 .table {
   width: 100%;
+  overflow-y: scroll;
+  overflow-x: visible;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 10px;
+  margin: 10px 10px;
 }
 
 th,

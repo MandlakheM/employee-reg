@@ -8,15 +8,15 @@ function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
   const [searchID, setSearchID] = useState("");
   const [errors, setErrors] = useState({});
 
-  const activateModal = () => {
-    // setCurrentEmployee(employee);
+  const activateModal = (emp) => {
     setModal(true);
+    setCurrentEmployee(emp);
     // console.log(currentEmployee);
   };
 
   const deactivateModal = () => {
     setModal(false);
-    // setCurrentEmployee(null);
+    setCurrentEmployee(null);
   };
 
   const handleChange = (event) => {
@@ -77,9 +77,9 @@ function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
       const response = await axios.get(
         `http://localhost:4000/employee/${searchID}`
       );
-      setCurrentEmployee([response.data]);
-      // alert("Employee found");
-      // console.log([response.data]);
+      setCurrentEmployee(response.data);
+      activateModal(currentEmployee);
+      // console.log(response.data);
     } catch (error) {
       console.error("Failed to get employee:", error);
       alert("Employee not found");
@@ -156,7 +156,10 @@ function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
                 />
               </td> */}
                 <td>
-                  <button className="updateBtn" onClick={activateModal}>
+                  <button
+                    className="updateBtn"
+                    onClick={() => activateModal(employee)}
+                  >
                     Edit
                   </button>
                   <button

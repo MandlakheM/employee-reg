@@ -54,7 +54,7 @@ function Navbar() {
 
       <ul className={`nav-links ${isOpen ? "open" : ""}`}>
         <li>
-          <Link to="/" onClick={toggleMenu}>
+          <Link to="/add-employees" onClick={toggleMenu}>
             Add Employee
           </Link>
         </li>
