@@ -6,6 +6,8 @@ import AddEmployee from "./components/AddEmployee";
 import ViewDeletedEmployees from "./components/ViewDeletedEmployees";
 import Navbar from "./components/Navbar";
 import axios from "axios";
+import SignIn from "./components/signIn";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const [employees, setEmployees] = useState([]);
@@ -33,46 +35,72 @@ function App() {
     try {
       await axios.post("http://localhost:4000/add-employee", employee);
       alert("employee added");
+      setEmpID((prevID) => prevID + 1);
     } catch (error) {
       console.log("failed to add employee: ", error);
     }
   };
 
-  const deleteEmployee = async (employeID) => {
+  const deleteEmployee = async (employeeId) => {
     try {
-      await axios.delete(`http://localhost:4000/employee/${employeID}`);
-      alert("employee deleted");
+      await axios.delete(`http://localhost:4000/employee/${employeeId}`);
+      alert("Employee deleted successfully");
+      fetchEmployees();
     } catch (error) {
-      console.log("failed to delete employee: ", error);
+      console.error("Failed to delete employee:", error);
+      alert("Failed to delete employee");
     }
   };
 
-  const editEmployee = (index, updatedEmployee) => {};
+  const editEmployee = async (updatedEmployee) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:4000/employee/${updatedEmployee.empID}`,
+        updatedEmployee
+      );
+      alert("Employee updated successfully");
+      fetchEmployees();
+      return response.data;
+    } catch (error) {
+      console.error("Failed to update employee:", error);
+      alert("Failed to update employee");
+    }
+  };
 
   return (
     <>
       <Navbar />
       <Routes>
         <Route
-          path="/"
+          path="/add-employees"
           element={
-            <AddEmployee addEmployee={addEmployee} nextEmpID={nextEmpID} />
+            <ProtectedRoute>
+              <AddEmployee addEmployee={addEmployee} nextEmpID={nextEmpID} />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/view-employees"
           element={
-            <ViewEmployees
-              employees={employees}
-              deleteEmployee={deleteEmployee}
-              editEmployee={editEmployee}
-            />
+            <ProtectedRoute>
+              <ViewEmployees
+                employees={employees}
+                deleteEmployee={deleteEmployee}
+                editEmployee={editEmployee}
+              />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/view-deleted"
-          element={<ViewDeletedEmployees removedEmp={removedEmp} />}
+          element={
+            <ProtectedRoute>
+              <ViewDeletedEmployees removedEmp={removedEmp} />
+            </ProtectedRoute>
+          }
         />
+
+        <Route path="/" element={<SignIn />} />
       </Routes>
     </>
   );

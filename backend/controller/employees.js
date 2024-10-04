@@ -34,7 +34,7 @@ export const getEmployees = async (req, res) => {
 
 export const addEmployees = async (req, res) => {
   try {
-    const dummyData = {
+    const employeeData = {
       firstName: req.body.firstName,
       middleName: req.body.middleName,
       lastName: req.body.lastName,
@@ -42,19 +42,29 @@ export const addEmployees = async (req, res) => {
       dob: req.body.dob,
       email: req.body.email,
       cellNumber: req.body.cellNumber,
-      empID: req.body.empID,
       position: req.body.position,
       image: req.body.image,
     };
 
     const employeeRef = db.collection("employees").doc();
-    await employeeRef.set(dummyData);
-    res.send({
+
+    const newEmpId = employeeRef.id;
+
+    employeeData.empID = newEmpId;
+
+    await employeeRef.set(employeeData);
+
+    res.status(201).send({
       message: "Employee added successfully",
+      employeeId: newEmpId,
+      employee: employeeData
     });
   } catch (error) {
-    console.log("Failed to add employee: ", error);
-    res.status(500).send(error);
+    console.error("Failed to add employee: ", error);
+    res.status(500).send({
+      message: "Failed to add employee",
+      error: error.message
+    });
   }
 };
 
@@ -90,12 +100,20 @@ export const updateEmployee = async (req, res) => {
   try {
     const employeeId = req.params.id;
     const updateData = req.body;
+    
+    const employeeRef = db.collection("employees").doc(employeeId);
+    const doc = await employeeRef.get();
 
-    await db.collection("employees").doc(employeeId).update(updateData);
+    if (!doc.exists) {
+      res.status(404).send(`Employee with ID ${employeeId} not found`);
+      return;
+    }
 
+    await employeeRef.update(updateData);
+    
     res.status(200).send("Employee updated successfully");
   } catch (error) {
     console.error("Error updating employee:", error);
-    res.status(500).send("Error updating employee");
+    res.status(500).send(`Error updating employee: ${error.message}`);
   }
 };

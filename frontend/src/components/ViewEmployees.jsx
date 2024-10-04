@@ -4,18 +4,19 @@ import axios from "axios";
 
 function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
   const [modal, setModal] = useState(false);
-  const [currentEmployee, setCurrentEmployee] = useState(null);
+  const [currentEmployee, setCurrentEmployee] = useState([]);
   const [searchID, setSearchID] = useState("");
   const [errors, setErrors] = useState({});
 
-  const activateModal = (employee) => {
-    setCurrentEmployee(employee);
+  const activateModal = () => {
+    // setCurrentEmployee(employee);
     setModal(true);
+    // console.log(currentEmployee);
   };
 
   const deactivateModal = () => {
     setModal(false);
-    setCurrentEmployee(null);
+    // setCurrentEmployee(null);
   };
 
   const handleChange = (event) => {
@@ -57,7 +58,7 @@ function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (validate()) {
       const formattedCellNumber =
@@ -66,21 +67,22 @@ function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
         ...currentEmployee,
         cellNumber: formattedCellNumber,
       };
-      const index = employees.findIndex(
-        (emp) => emp.empID === updatedEmployee.empID
-      );
-      if (index !== -1) {
-        editEmployee(index, updatedEmployee);
-      }
+      editEmployee(updatedEmployee);
       deactivateModal();
     }
   };
 
   const handleSearch = async () => {
     try {
-      await axios.get(`http://localhost:4000/${searchID}`);
+      const response = await axios.get(
+        `http://localhost:4000/employee/${searchID}`
+      );
+      setCurrentEmployee([response.data]);
+      // alert("Employee found");
+      // console.log([response.data]);
     } catch (error) {
-      console.log("failed to search employee: ", error);
+      console.error("Failed to get employee:", error);
+      alert("Employee not found");
     }
   };
 
@@ -154,10 +156,7 @@ function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
                 />
               </td> */}
                 <td>
-                  <button
-                    className="updateBtn"
-                    onClick={() => activateModal(employee)}
-                  >
+                  <button className="updateBtn" onClick={activateModal}>
                     Edit
                   </button>
                   <button
