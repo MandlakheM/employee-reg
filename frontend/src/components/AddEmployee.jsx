@@ -224,7 +224,7 @@ function AddEmployee({ addEmployee, nextEmpID }) {
           type="file"
           onChange={(e) => setFile(e.target.files[0])}
         />
-
+        
         <button type="submit" className="submitBtn">
           Add Employee
         </button>

@@ -4,6 +4,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import "./Nav.css";
 import { useNavigate } from "react-router-dom";
+import AccountMenu from "./accountMenu";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,9 +72,10 @@ function Navbar() {
       </ul>
 
       {isLoggedIn && (
-        <button onClick={handleSignOut} className="signOutBtn">
-          Sign out
-        </button>
+        // <button onClick={handleSignOut} className="signOutBtn">
+        //   Sign out
+        // </button>
+        <AccountMenu handleSignOut={handleSignOut} />
       )}
     </nav>
   );

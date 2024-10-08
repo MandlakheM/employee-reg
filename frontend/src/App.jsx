@@ -20,6 +20,7 @@ function App() {
     //   setEmployees(JSON.parse(storedEmployees));
     // }
     fetchEmployees();
+    fetchDeletedEmp();
   }, []);
 
   const fetchEmployees = async () => {
@@ -27,7 +28,18 @@ function App() {
       const response = await axios.get("http://localhost:4000/employees");
       setEmployees(response.data);
     } catch (error) {
-      console.log(object)("Error fetching recipes:", error);
+      console.log("Error fetching recipes:", error);
+    }
+  };
+
+  const fetchDeletedEmp = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/deleted-employees"
+      );
+      setRemovedEmp(response.data);
+    } catch (error) {
+      console.log("Error fetching recipes:", error);
     }
   };
 
