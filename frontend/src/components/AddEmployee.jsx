@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./AddEmployee.css";
+import { storage } from "../../firebaseConfig";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 
 function AddEmployee({ addEmployee, nextEmpID }) {
   const [empInfo, setEmpInfo] = useState({
@@ -16,10 +19,51 @@ function AddEmployee({ addEmployee, nextEmpID }) {
   });
   const [errors, setErrors] = useState({});
   const [empID, setEmpID] = useState(nextEmpID);
+  const [file, setFile] = useState("");
+  const [per, setPerc] = useState(null);
 
   useEffect(() => {
     setEmpID(nextEmpID);
   }, [nextEmpID]);
+
+  useEffect(() => {
+    const uploadFile = () => {
+      const name = new Date().getTime() + file.name;
+
+      // console.log(name);
+      const storageRef = ref(storage, file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          setPerc(progress);
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+              break;
+          }
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setEmpInfo((prev) => ({ ...prev, image: downloadURL }));
+          });
+        }
+      );
+    };
+    file && uploadFile();
+  }, [file]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -178,12 +222,7 @@ function AddEmployee({ addEmployee, nextEmpID }) {
           id="image"
           name="image"
           type="file"
-          onChange={(event) => {
-            setEmpInfo({
-              ...empInfo,
-              image: event.target.files[0],
-            });
-          }}
+          onChange={(e) => setFile(e.target.files[0])}
         />
 
         <button type="submit" className="submitBtn">
