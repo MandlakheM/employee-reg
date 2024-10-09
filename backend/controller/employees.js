@@ -1,5 +1,7 @@
 import admin from "firebase-admin";
 import serviceAccount from "../key.json" assert { type: "json" };
+import { auth } from "../../frontend/firebaseConfig.js";
+import { createUserWithEmailAndPassword } from "@firebase/auth";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -89,7 +91,6 @@ export const deleteEmployee = async (req, res) => {
   try {
     const employeeId = req.params.id;
 
-    // Step 1: Get the employee's data before deleting
     const employeeDoc = await db.collection("employees").doc(employeeId).get();
 
     if (!employeeDoc.exists) {
@@ -98,15 +99,12 @@ export const deleteEmployee = async (req, res) => {
 
     const employeeData = employeeDoc.data();
 
-    // Step 2: Delete the employee from the 'employees' collection
     await db.collection("employees").doc(employeeId).delete();
     res.status(200).send("Employee deleted successfully");
 
-    // Step 3: Save the deleted employee's data in the 'deletedEmployees' collection
     const employeeRef = db.collection("deletedEmployees").doc();
     const newEmpId = employeeRef.id;
 
-    // Add new field with generated ID or keep existing fields intact
     employeeData.empID = newEmpId;
 
     await employeeRef.set(employeeData);
@@ -138,7 +136,7 @@ export const updateEmployee = async (req, res) => {
   }
 };
 
-export const getDeletedEmployees = async (req,res) => {
+export const getDeletedEmployees = async (req, res) => {
   try {
     const employeesRef = db.collection("deletedEmployees");
     const snapshot = await employeesRef.get();
@@ -160,5 +158,59 @@ export const getDeletedEmployees = async (req,res) => {
   } catch (error) {
     console.error("Error getting employees:", error);
     res.status(500).send("Error retrieving employees");
+  }
+};
+
+export const addAdmin = async (req, res) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      req.body.email,
+      req.body.password
+    );
+
+    const adminDetails = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      dob: req.body.dob,
+      image: req.body.image,
+    };
+
+    const adminRef = db.collection("admins").doc();
+    const newAdminId = adminRef.id;
+
+    adminDetails.adminID = newAdminId;
+
+    await adminRef.set(adminDetails);
+
+    res.status(201).send({
+      message: "Admin added successfully",
+      adminId: newAdminId,
+      admin: adminDetails,
+    });
+  } catch (error) {
+    console.error("Registration failed. Please try again.", error);
+    res.status(500).send({
+      message: "Failed to add admin",
+      error: error.message,
+    });
+  }
+};
+
+export const getAdmin = async (req, res) => {
+  try {
+    const adminId = req.params.id;
+    const adminRef = db.collection("admins").doc(adminId);
+    const doc = await adminRef.get();
+
+    if (!doc.exists) {
+      res.status(404).send("Employee not found");
+    } else {
+      res.status(200).send(doc.data());
+    }
+  } catch (error) {
+    console.error("Error getting employee:", error);
+    res.status(500).send("Error retrieving employee");
   }
 };

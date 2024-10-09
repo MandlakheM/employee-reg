@@ -17,6 +17,7 @@ function Navbar() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
+        console.log(user)
       } else {
         setIsLoggedIn(false);
       }
