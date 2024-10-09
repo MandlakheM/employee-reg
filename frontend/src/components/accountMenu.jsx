@@ -12,7 +12,7 @@ import Logout from "@mui/icons-material/Logout";
 import AdminDetails from "./AdminDetails";
 import AddAdmin from "./AddAdmin";
 
-export default function AccountMenu({ handleSignOut }) {
+export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [detailsModal, setdetailsModal] = React.useState(false);
   const [addAdmin, setAddAdmin] = React.useState(false);
@@ -100,7 +100,7 @@ export default function AccountMenu({ handleSignOut }) {
           Logout
         </MenuItem>
       </Menu>
-      {detailsModal && <AdminDetails handleActivate={handleActivate} />}
+      {detailsModal && <AdminDetails handleActivate={handleActivate} isLoggedIn={isLoggedIn} uid={uid}/>}
       {addAdmin && <AddAdmin handleAddAdmin={handleAddAdmin} />}
     </React.Fragment>
   );

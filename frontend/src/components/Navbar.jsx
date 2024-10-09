@@ -4,12 +4,13 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
 import "./Nav.css";
 import { useNavigate } from "react-router-dom";
-import AccountMenu from "./accountMenu"
+import AccountMenu from "./accountMenu";
 import AdminDetails from "./AdminDetails";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [uid, setUid] = useState('');
 
   const navigate = useNavigate;
 
@@ -17,7 +18,8 @@ function Navbar() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsLoggedIn(true);
-        console.log(user)
+        setUid(user.uid)
+        // console.log(user);
       } else {
         setIsLoggedIn(false);
       }
@@ -77,7 +79,7 @@ function Navbar() {
         // <button onClick={handleSignOut} className="signOutBtn">
         //   Sign out
         // </button>
-        <AccountMenu handleSignOut={handleSignOut} />
+        <AccountMenu handleSignOut={handleSignOut} isLoggedIn={isLoggedIn} uid={uid} />
       )}
     </nav>
   );

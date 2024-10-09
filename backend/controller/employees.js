@@ -173,11 +173,12 @@ export const addAdmin = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
+      password: req.body.password,
       dob: req.body.dob,
       image: req.body.image,
     };
 
-    const adminRef = db.collection("admins").doc();
+    const adminRef = db.collection("admins").doc(userCredential.user.uid);
     const newAdminId = adminRef.id;
 
     adminDetails.adminID = newAdminId;
