@@ -215,3 +215,68 @@ export const getAdmin = async (req, res) => {
     res.status(500).send("Error retrieving employee");
   }
 };
+
+export const getAllAdmins = async (req, res) => {
+  try {
+    const adminsRef = db.collection("admins");
+    const snapshot = await adminsRef.get();
+
+    if (snapshot.empty) {
+      res.status(200).send([]);
+      return;
+    }
+
+    const admins = [];
+    snapshot.forEach((doc) => {
+      admins.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+
+    res.status(200).send(admins);
+  } catch (error) {
+    console.error("Error getting employees:", error);
+    res.status(500).send("Error retrieving admins");
+  }
+};
+
+export const deleteAdmin = async (req, res) => {
+  try {
+    const adminID = req.params.id;
+
+    const adminDoc = await db.collection("admins").doc(adminID).get();
+
+    if (!adminDoc.exists) {
+      return res.status(404).send("Employee not found");
+    }
+
+    await db.collection("admins").doc(adminID).delete();
+    res.status(200).send("Admin deleted successfully");
+  } catch (error) {
+    console.error("Error deleting employee:", error);
+    res.status(500).send("Error deleting employee");
+  }
+};
+
+export const updateAdmin = async (req, res) => {
+  try {
+    const adminID = req.params.id;
+    const updateData = req.body;
+
+    const adminRef = db.collection("admins").doc(adminID);
+    const doc = await adminRef.get();
+
+    if (!doc.exists) {
+      res.status(404).send(`Admin with ID ${adminID} not found`);
+      return;
+    }
+
+    await adminRef.update(updateData);
+
+    res.status(200).send("Admin updated successfully");
+  } catch (error) {
+    console.error("Error updating admin:", error);
+    res.status(500).send(`Error updating admin: ${error.message}`);
+  }
+};

@@ -11,11 +11,14 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Logout from "@mui/icons-material/Logout";
 import AdminDetails from "./AdminDetails";
 import AddAdmin from "./AddAdmin";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import ViewAdmins from "./ViewAdmins";
 
 export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [detailsModal, setdetailsModal] = React.useState(false);
   const [addAdmin, setAddAdmin] = React.useState(false);
+  const [viewingAdmin, setViewingAdmin] = React.useState(false);
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -29,6 +32,9 @@ export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
   };
   const handleAddAdmin = () => {
     setAddAdmin(!addAdmin);
+  };
+  const handleViewingAdmin = () => {
+    setViewingAdmin(!viewingAdmin);
   };
   return (
     <React.Fragment>
@@ -93,6 +99,12 @@ export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
           </ListItemIcon>
           Add another admin
         </MenuItem>
+        <MenuItem onClick={handleViewingAdmin}>
+          <ListItemIcon>
+            <SupervisorAccountIcon fontSize="small" />
+          </ListItemIcon>
+          View current admins
+        </MenuItem>
         <MenuItem onClick={handleSignOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
@@ -100,8 +112,15 @@ export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
           Logout
         </MenuItem>
       </Menu>
-      {detailsModal && <AdminDetails handleActivate={handleActivate} isLoggedIn={isLoggedIn} uid={uid}/>}
+      {detailsModal && (
+        <AdminDetails
+          handleActivate={handleActivate}
+          isLoggedIn={isLoggedIn}
+          uid={uid}
+        />
+      )}
       {addAdmin && <AddAdmin handleAddAdmin={handleAddAdmin} />}
+      {viewingAdmin && <ViewAdmins handleActivate={handleViewingAdmin} />}
     </React.Fragment>
   );
 }

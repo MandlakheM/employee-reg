@@ -9,6 +9,9 @@ import {
   getDeletedEmployees,
   addAdmin,
   getAdmin,
+  getAllAdmins,
+  deleteAdmin,
+  updateAdmin
 } from "../controller/employees.js";
 
 const router = express.Router();
@@ -22,5 +25,9 @@ router.get("/deleted-employees", getDeletedEmployees);
 
 router.post("/add-admin", addAdmin);
 router.get("/admin/:id", getAdmin);
+router.get("/admins", getAllAdmins);
+router.delete("/admin/:id", deleteAdmin);
+router.put("/admin/:id", updateAdmin);
+
 
 export default router;

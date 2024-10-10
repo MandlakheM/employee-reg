@@ -30,7 +30,7 @@ const AdminDetails = ({ handleActivate, isLoggedIn, uid }) => {
 
   useEffect(() => {
     fetchAdminData();
-    console.log(uid);
+    // console.log(uid);
   }, []);
 
   const handleAddAdmin = () => {

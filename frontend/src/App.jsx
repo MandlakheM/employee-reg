@@ -28,7 +28,7 @@ function App() {
       const response = await axios.get("http://localhost:4000/employees");
       setEmployees(response.data);
     } catch (error) {
-      console.log("Error fetching recipes:", error);
+      console.log("Error fetching employees:", error);
     }
   };
 
@@ -39,7 +39,7 @@ function App() {
       );
       setRemovedEmp(response.data);
     } catch (error) {
-      console.log("Error fetching recipes:", error);
+      console.log("Error fetching employees:", error);
     }
   };
 
@@ -47,6 +47,7 @@ function App() {
     try {
       await axios.post("http://localhost:4000/add-employee", employee);
       alert("employee added");
+      fetchEmployees()
       setEmpID((prevID) => prevID + 1);
     } catch (error) {
       console.log("failed to add employee: ", error);
