@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import "./AdminDetails.css";
-import axios from "axios";
 import AddAdmin from "./AddAdmin";
 
-const AdminDetails = ({ handleActivate, isLoggedIn, uid }) => {
-  const [userInfo, setUserInfo] = useState({});
+const AdminDetails = ({ handleActivate, isLoggedIn, uid, userInfo }) => {
   const [addAdmin, setAddAdmin] = useState(false);
   const [updating, setUpdating] = useState(false);
 
@@ -18,20 +16,6 @@ const AdminDetails = ({ handleActivate, isLoggedIn, uid }) => {
   //     });
   //     return () => unsubscribe();
   //   }, [auth]);
-
-  const fetchAdminData = async () => {
-    try {
-      const response = await axios.get(`http://localhost:4000/admin/${uid}`);
-      setUserInfo(response.data);
-    } catch (error) {
-      console.log("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchAdminData();
-    // console.log(uid);
-  }, []);
 
   const handleAddAdmin = () => {
     setAddAdmin(!addAdmin);
@@ -80,14 +64,13 @@ const AdminDetails = ({ handleActivate, isLoggedIn, uid }) => {
               readOnly
             />
           </div>
-
           <div className="closeModal" onClick={handleActivate}>
             close
           </div>
           <button onClick={handleAddAdmin}>update</button>
         </div>
       </div>
-      {addAdmin && <AddAdmin userInfo={userInfo} updating={updating}/>}
+      {addAdmin && <AddAdmin userInfo={userInfo} updating={updating} />}
     </>
   );
 };

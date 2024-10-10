@@ -280,3 +280,26 @@ export const updateAdmin = async (req, res) => {
     res.status(500).send(`Error updating admin: ${error.message}`);
   }
 };
+
+export const makeSysAdmin = async (req, res) => {
+  const adminEmail = req.body.email;
+
+  try {
+    const user = await admin.auth().getUserByEmail(adminEmail);
+
+    await admin.auth().setCustomUserClaims(user.uid, { sysAdmin: true });
+
+    const userRef = db.collection("admins").doc(user.uid);
+
+    await userRef.update({ sysAdmin: "true" });
+
+    res.status(200).send(`User ${adminEmail} is now a sysAdmin`);
+  } catch (error) {
+    console.error(`Error occurred: ${error}`);
+    if (error.code === "auth/user-not-found") {
+      res.status(404).send("User not found");
+    } else {
+      res.status(500).send("Error setting custom claims");
+    }
+  }
+};

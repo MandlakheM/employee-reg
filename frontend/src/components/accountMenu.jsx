@@ -13,12 +13,19 @@ import AdminDetails from "./AdminDetails";
 import AddAdmin from "./AddAdmin";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import ViewAdmins from "./ViewAdmins";
+import axios from "axios";
 
 export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [detailsModal, setdetailsModal] = React.useState(false);
   const [addAdmin, setAddAdmin] = React.useState(false);
   const [viewingAdmin, setViewingAdmin] = React.useState(false);
+  const [userInfo, setUserInfo] = React.useState({});
+  const [isSysAdmin, setIsSysAdmin] = React.useState(false);
+
+  //   if (userInfo.sysAdmin === "true") {
+  //     setIsSysAdmin(true);
+  //   }
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -26,6 +33,7 @@ export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
   };
   const handleClose = () => {
     setAnchorEl(null);
+    console.log("look", userInfo);
   };
   const handleActivate = () => {
     setdetailsModal(!detailsModal);
@@ -36,6 +44,28 @@ export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
   const handleViewingAdmin = () => {
     setViewingAdmin(!viewingAdmin);
   };
+
+  const fetchAdminData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:4000/admin/${uid}`);
+      setUserInfo(response.data);
+    } catch (error) {
+      console.log("Error fetching data:", error);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchAdminData();
+    // console.log(uid);
+  }, []);
+
+  React.useEffect(() => {
+    if (userInfo.sysAdmin === "true") {
+      setIsSysAdmin(true);
+    } else {
+      setIsSysAdmin(false);
+    }
+  }, [userInfo]);
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -93,18 +123,22 @@ export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
           <Avatar /> Profile
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleAddAdmin}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another admin
-        </MenuItem>
-        <MenuItem onClick={handleViewingAdmin}>
-          <ListItemIcon>
-            <SupervisorAccountIcon fontSize="small" />
-          </ListItemIcon>
-          View current admins
-        </MenuItem>
+        {isSysAdmin && (
+          <div>
+            <MenuItem onClick={handleAddAdmin}>
+              <ListItemIcon>
+                <PersonAdd fontSize="small" />
+              </ListItemIcon>
+              Add another admin
+            </MenuItem>
+            <MenuItem onClick={handleViewingAdmin}>
+              <ListItemIcon>
+                <SupervisorAccountIcon fontSize="small" />
+              </ListItemIcon>
+              View current admins
+            </MenuItem>
+          </div>
+        )}
         <MenuItem onClick={handleSignOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
@@ -117,6 +151,7 @@ export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
           handleActivate={handleActivate}
           isLoggedIn={isLoggedIn}
           uid={uid}
+          userInfo={userInfo}
         />
       )}
       {addAdmin && <AddAdmin handleAddAdmin={handleAddAdmin} />}

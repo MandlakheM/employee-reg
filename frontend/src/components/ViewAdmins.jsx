@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+// import { userInfo } from "os";
 
 const ViewAdmins = ({ handleActivate }) => {
   const [admins, setAdmins] = useState([]);
@@ -22,6 +23,15 @@ const ViewAdmins = ({ handleActivate }) => {
     } catch (error) {
       console.error("Failed to delete admin:", error);
       alert("Failed to delete admin");
+    }
+  };
+
+  const makeSysAdmin = async (admin) => {
+    try {
+      await axios.put(`http://localhost:4000/sysadmin/${admin.email}`, admin);
+      alert("new system admin created");
+    } catch (error) {
+      console.log("object");
     }
   };
 
@@ -51,7 +61,7 @@ const ViewAdmins = ({ handleActivate }) => {
               <tbody>
                 {admins.map((admin, index) => (
                   <tr key={index}>
-                    <td>{admin.empID}</td>
+                    <td>{admin.adminID}</td>
                     <td>{admin.firstName}</td>
                     <td>{admin.lastName}</td>
                     <td>{admin.dob}</td>
@@ -71,10 +81,16 @@ const ViewAdmins = ({ handleActivate }) => {
                     </td>
                     <td>
                       <button
+                        className="updateBtn"
+                        onClick={() => makeSysAdmin(admin)}
+                      >
+                        Make system admin
+                      </button>
+                      <button
                         className="deleteBtn"
                         onClick={() => deleteAdmin(admin.adminID)}
                       >
-                        Delete
+                        Delete admin
                       </button>
                     </td>
                   </tr>

@@ -11,7 +11,8 @@ import {
   getAdmin,
   getAllAdmins,
   deleteAdmin,
-  updateAdmin
+  updateAdmin,
+  makeSysAdmin,
 } from "../controller/employees.js";
 
 const router = express.Router();
@@ -28,6 +29,6 @@ router.get("/admin/:id", getAdmin);
 router.get("/admins", getAllAdmins);
 router.delete("/admin/:id", deleteAdmin);
 router.put("/admin/:id", updateAdmin);
-
+router.put("/sysadmin/:id", makeSysAdmin);
 
 export default router;
