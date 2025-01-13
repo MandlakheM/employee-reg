@@ -19,6 +19,10 @@ Position,
 ID
 
 
+## ScreenShot 
+![Screenshot 2025-01-13 001617](https://github.com/user-attachments/assets/3adb9f55-1967-4a16-8e8a-d56697effbfc)
+
+
 ii) Users can search for employees by ID.
 
 i) Users can delete existing employees.
