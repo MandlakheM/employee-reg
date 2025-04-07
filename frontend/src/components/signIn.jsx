@@ -6,18 +6,29 @@ import { useNavigate } from "react-router-dom";
 const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   function handleSubmit(e) {
+    setLoading(true);
     e.preventDefault();
     signInWithEmailAndPassword(auth, username, password)
       .then(() => {
         navigate("/add-employees");
+        setLoading(false);
       })
       .catch((error) => {
         const errorMessage = error.message;
         alert(errorMessage);
       });
+  }
+
+  if (loading) {
+    return (
+      <div className="loaderCont">
+        <div class="loader"></div>
+      </div>
+    );
   }
 
   return (
