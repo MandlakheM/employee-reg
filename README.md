@@ -13,6 +13,9 @@ The Employee Registration System is a full-stack web application designed to man
 - Delete employee records
 - Responsive design for various screen sizes
 
+## Live site
+https://employee-reg-ui.onrender.com/
+
 ## Tech Stack
 
 - Frontend: React.js
@@ -78,6 +81,6 @@ Before you begin, ensure you have met the following requirements:
 ## SYSTEM ADMIN CREDENTIALS
 
 ```
-mangumtamandilakhe7@gmail.com
-mandi123
+mangumtandilakhe7@gmail.com
+mandi1234
 ```
