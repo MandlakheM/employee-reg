@@ -74,3 +74,10 @@ Before you begin, ensure you have met the following requirements:
 - GET `/employee/:id` - Retrieve a specific employee
 - PUT `/employee/:id` - Update an employee
 - DELETE `/employee/:id` - Delete an employee
+
+## SYSTEM ADMIN CREDENTIALS
+
+```
+mangumtamandilakhe7@gmail.com
+mandi123
+```
