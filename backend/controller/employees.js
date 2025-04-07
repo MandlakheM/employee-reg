@@ -1,13 +1,15 @@
-import admin from "firebase-admin";
-import serviceAccount from "../key.json" assert { type: "json" };
-import { auth } from "../../frontend/firebaseConfig.js";
+// import admin from "firebase-admin";
+// import serviceAccount from "../key.json" assert { type: "json" };
+// import admin from 'firebase-admin';
+import { auth } from "../firebaseClientConfig.js"
 import { createUserWithEmailAndPassword } from "@firebase/auth";
+import { admin, db } from '../firebaseAdminConfig.js';
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+// });
 
-const db = admin.firestore();
+// const db = admin.firestore();
 
 export const getEmployees = async (req, res) => {
   try {

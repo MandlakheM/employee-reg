@@ -28,7 +28,7 @@ function AddEmployee({ addEmployee, nextEmpID }) {
 
   useEffect(() => {
     const uploadFile = () => {
-      const name = new Date().getTime() + file.name;m  
+      const name = new Date().getTime() + file.name;
 
       // console.log(name);
       const storageRef = ref(storage, file.name);
