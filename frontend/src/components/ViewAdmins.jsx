@@ -7,7 +7,7 @@ const ViewAdmins = ({ handleActivate }) => {
 
   const fetchAdmins = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/admins");
+      const response = await axios.get("https://employee-reg-backend.onrender.com/admins");
       setAdmins(response.data);
       console.log(admins);
     } catch (error) {
@@ -17,7 +17,7 @@ const ViewAdmins = ({ handleActivate }) => {
 
   const deleteAdmin = async (adminID) => {
     try {
-      await axios.delete(`http://localhost:4000/admin/${adminID}`);
+      await axios.delete(`https://employee-reg-backend.onrender.com/admin/${adminID}`);
       alert("Admin deleted successfully");
       fetchAdmins();
     } catch (error) {
@@ -28,7 +28,7 @@ const ViewAdmins = ({ handleActivate }) => {
 
   const makeSysAdmin = async (admin) => {
     try {
-      await axios.put(`http://localhost:4000/sysadmin/${admin.email}`, admin);
+      await axios.put(`https://employee-reg-backend.onrender.com/sysadmin/${admin.email}`, admin);
       alert("new system admin created");
     } catch (error) {
       console.log("object");

@@ -35,7 +35,7 @@ const AddAdmin = ({ handleAddAdmin, userInfo, updating }) => {
       adminInfo.password.trim() !== ""
     ) {
       try {
-        await axios.post("http://localhost:4000/add-admin", adminInfo);
+        await axios.post("https://employee-reg-backend.onrender.com/add-admin", adminInfo);
         alert("new admin created");
       } catch (error) {
         console.log("unable to create new admin :", error);

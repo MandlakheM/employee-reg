@@ -25,7 +25,7 @@ function App() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/employees");
+      const response = await axios.get("https://employee-reg-backend.onrender.com/employees");
       setEmployees(response.data);
     } catch (error) {
       console.log("Error fetching employees:", error);
@@ -35,7 +35,7 @@ function App() {
   const fetchDeletedEmp = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/deleted-employees"
+        "https://employee-reg-backend.onrender.com/deleted-employees"
       );
       setRemovedEmp(response.data);
     } catch (error) {
@@ -45,7 +45,7 @@ function App() {
 
   const addEmployee = async (employee) => {
     try {
-      await axios.post("http://localhost:4000/add-employee", employee);
+      await axios.post("https://employee-reg-backend.onrender.com/add-employee", employee);
       alert("employee added");
       fetchEmployees()
       setEmpID((prevID) => prevID + 1);
@@ -56,7 +56,7 @@ function App() {
 
   const deleteEmployee = async (employeeId) => {
     try {
-      await axios.delete(`http://localhost:4000/employee/${employeeId}`);
+      await axios.delete(`https://employee-reg-backend.onrender.com/employee/${employeeId}`);
       alert("Employee deleted successfully");
       fetchEmployees();
     } catch (error) {
@@ -68,7 +68,7 @@ function App() {
   const editEmployee = async (updatedEmployee) => {
     try {
       const response = await axios.put(
-        `http://localhost:4000/employee/${updatedEmployee.empID}`,
+        `https://employee-reg-backend.onrender.com/employee/${updatedEmployee.empID}`,
         updatedEmployee
       );
       alert("Employee updated successfully");

@@ -47,7 +47,7 @@ export default function AccountMenu({ handleSignOut, isLoggedIn, uid }) {
 
   const fetchAdminData = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/admin/${uid}`);
+      const response = await axios.get(`https://employee-reg-backend.onrender.com/admin/${uid}`);
       setUserInfo(response.data);
     } catch (error) {
       console.log("Error fetching data:", error);

@@ -75,7 +75,7 @@ function ViewEmployees({ employees, deleteEmployee, editEmployee }) {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/employee/${searchID}`
+        `https://employee-reg-backend.onrender.com/employee/${searchID}`
       );
       setCurrentEmployee(response.data);
       activateModal(response.data);
